@@ -98,8 +98,9 @@ Real estate analysts, appraisers, and investors need data-driven insights into w
 
 **Most Accurately Priced:** 
 - Neighborhoods with errors < $150K show consistent pricing patterns
+<img width="728" height="547" alt="image" src="https://github.com/user-attachments/assets/4738fe09-904f-4737-8723-0ac909b354e6" />
 
-![Neighborhood Price Analysis](results/neighborhood_analysis.png)
+
 
 ### 5. Model Development
 
@@ -111,8 +112,6 @@ Real estate analysts, appraisers, and investors need data-driven insights into w
 - **Mean Absolute Error (MAE):** $27,156
 - Provides reasonable baseline for price predictions
 - Error distribution shows most predictions within ±$50K
-
-![Error Distribution](results/error_distribution.png)
 
 ---
 
