@@ -241,6 +241,3 @@ housing-price-analysis/
 This analysis is for educational and portfolio demonstration purposes only. Predictions should not be used as the sole basis for real estate decisions. Property valuations require professional appraisal considering local market conditions, legal factors, and property-specific details not captured in this dataset.
 
 ---
-## License
-
-MIT License - feel free to use this code for learning and portfolio purposes.
