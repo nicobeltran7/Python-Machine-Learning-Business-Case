@@ -47,13 +47,15 @@ Real estate analysts, appraisers, and investors need data-driven insights into w
 - Target variable (SalePrice) distribution shows right-skewed pattern
 - Most properties sold between $100K-$250K range
 
-![SalePrice Distribution](results/saleprice_distribution.png)
+<img width="975" height="543" alt="image" src="https://github.com/user-attachments/assets/777b2004-e1b8-469b-bb58-cd0b8985cd9e" />
+
 
 **Correlation Analysis**
 - Computed correlation matrix for all numerical features
 - Identified strongest predictors of sale price
 
-![Correlation Heatmap](results/correlation_heatmap.png)
+<img width="975" height="993" alt="image" src="https://github.com/user-attachments/assets/bccc61d3-0f83-4c37-a99c-3c04316fd04c" />
+
 
 **Key Findings:**
 - **Overall Quality** shows strongest correlation with price
@@ -69,14 +71,18 @@ Real estate analysts, appraisers, and investors need data-driven insights into w
 - R² indicates strong predictive power
 - Larger properties command higher prices
 
-![Total Area vs SalePrice](results/total_area_vs_price.png)
+<img width="975" height="553" alt="image" src="https://github.com/user-attachments/assets/49a64622-1e06-406b-a91b-bb4b309d595d" />
+
+
 
 **Monthly Sales Patterns**
 - Sale prices vary by month (seasonal effects)
 - Months 5-7 (May-July) show higher median prices
 - Winter months show more price variability
 
-![Monthly Sales Pattern](results/monthly_sales.png)
+<img width="975" height="552" alt="image" src="https://github.com/user-attachments/assets/9c18fcfd-9cbf-431d-a123-843cd3569cf0" />
+
+
 
 ### 4. Neighborhood Analysis
 
@@ -84,11 +90,11 @@ Real estate analysts, appraisers, and investors need data-driven insights into w
 - Computed average prediction errors by neighborhood
 - Neighborhoods ranked by pricing differential
 
-**Top 5 Overpriced Neighborhoods** (Model underestimates):
+**Top 3 Overpriced Neighborhoods** (Model underestimates):
 1. NoRidge: +$182,334
 2. NridgHt: +$182,334
 3. StoneBr: +$152,573
-4. [Placeholder for additional results]
+
 
 **Most Accurately Priced:** 
 - Neighborhoods with errors < $150K show consistent pricing patterns
