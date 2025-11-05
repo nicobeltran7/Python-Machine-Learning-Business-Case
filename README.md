@@ -25,7 +25,8 @@ The goal wasn't just to achieve high accuracy, but to build an **interpretable, 
 - Examined data types, missing values, and summary statistics
 - Visualized `SalePrice` distribution (revealed right-skewed pattern typical of real estate)
 
-![SalePrice Distribution](path/to/saleprice_distribution.png)
+<img width="613" height="373" alt="image" src="https://github.com/user-attachments/assets/22fbae9f-337d-45e1-91a0-e595d65f0754" />
+
 *The right-skewed distribution shows most homes cluster in the $100K-$200K range, with a long tail of luxury properties.*
 
 ### 2. **Feature Engineering**
@@ -44,12 +45,14 @@ This composite metric serves as a comprehensive proxy for overall home size.
   - `Overall Qual`: **0.799 correlation** (quality matters!)
   - `Year Built`: **0.558 correlation** (newer = pricier)
 
-![Correlation Heatmap](path/to/correlation_heatmap.png)
+<img width="655" height="662" alt="image" src="https://github.com/user-attachments/assets/9ace65dc-a0c2-45dc-b0f1-88e150949fbb" />
+
 *Correlation heatmap revealing the strongest predictors of sale price.*
 
 Used regression plots to validate linear relationships and detect outliers.
 
-![Total Area vs SalePrice](path/to/total_area_regression.png)
+<img width="607" height="380" alt="image" src="https://github.com/user-attachments/assets/0c2b255a-67a2-4567-81c3-eca3b1f5a527" />
+
 *Strong linear relationship between Total Area and SalePrice (r=0.793), with a few notable outliers.*
 
 ### 4. **Train/Test Strategy**
@@ -188,14 +191,6 @@ ames-housing-prediction/
 │   ├── total_area_regression.png
 │   └── error_distribution.png
 │
-├── src/
-│   ├── data_preprocessing.py
-│   ├── feature_engineering.py
-│   └── model_training.py
-│
-├── results/
-│   └── model_metrics.txt
-│
 └── README.md
 ```
 
@@ -208,14 +203,7 @@ This project demonstrates:
 - Interpretable error analysis by segment
 - The importance of starting simple before adding complexity
 
-## 📝 License
-
-Educational/Research Use
-
-## 👤 Author
 
 Machine Learning Case Study
-
 ---
 
-**Note:** This analysis prioritizes interpretability and reproducibility over raw predictive performance. The two-feature baseline model establishes a transparent foundation for understanding what drives home prices—and sets the stage for more sophisticated modeling approaches.
