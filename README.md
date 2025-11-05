@@ -1,248 +1,121 @@
-# Housing Price Prediction — Exploratory Data Analysis & Modeling
-
-**Objective**  
-Build a predictive model for residential property sale prices using real estate data, with comprehensive exploratory analysis to understand key price drivers and feature relationships.
-
-**Business case (why this exists)**  
-Real estate analysts, appraisers, and investors need data-driven insights into what drives property values. This project demonstrates a complete ML workflow: from raw data → cleaning → EDA → feature engineering → model training → evaluation, delivering actionable insights on pricing factors.
-
----
-
-## Dataset Overview
-
-- **Total records:** 2,929 residential properties
-- **Features:** 69 columns including property characteristics, location, quality ratings, and sale details
-- **Target variable:** `SalePrice` (residential property sale price in dollars)
-- **Key features analyzed:**
-  - Physical: Total Area, Lot Size, Bedrooms, Bathrooms
-  - Quality: Overall Quality, Overall Condition
-  - Location: Neighborhood, Zoning
-  - Time: Year Built, Year Remodeled, Month Sold
-
-### Data Summary Statistics
-
-| Metric | SalePrice ($) |
-|--------|---------------|
-| Count | 2,929 |
-| Mean | 188,828 |
-| Std Dev | 79,978 |
-| Min | 12,789 |
-| 25% | 135,000 |
-| 50% (Median) | 168,000 |
-| 75% | 214,000 |
-| Max | 755,000 |
-
----
-
-## Approach
-
-### 1. Data Loading & Initial Exploration
-- Load dataset from CSV
-- Check data types, missing values, and basic statistics
-- Identify categorical vs numerical features
-
-### 2. Exploratory Data Analysis (EDA)
-
-**Distribution Analysis**
-- Target variable (SalePrice) distribution shows right-skewed pattern
-- Most properties sold between $100K-$250K range
-
-<img width="975" height="543" alt="image" src="https://github.com/user-attachments/assets/777b2004-e1b8-469b-bb58-cd0b8985cd9e" />
-
-
-**Correlation Analysis**
-- Computed correlation matrix for all numerical features
-- Identified strongest predictors of sale price
-
-<img width="975" height="993" alt="image" src="https://github.com/user-attachments/assets/bccc61d3-0f83-4c37-a99c-3c04316fd04c" />
-
-
-**Key Findings:**
-- **Overall Quality** shows strongest correlation with price
-- **Total Area** (1st Floor + 2nd Floor + Basement) highly predictive
-- **Year Built** and **Year Remodeled** show positive correlation with price
-- **Garage characteristics** (cars, area) positively correlated
-- Many features show multicollinearity (e.g., room counts vs total area)
-
-### 3. Feature Relationships
-
-**Total Area vs SalePrice**
-- Clear positive linear relationship
-- R² indicates strong predictive power
-- Larger properties command higher prices
-
-<img width="975" height="553" alt="image" src="https://github.com/user-attachments/assets/49a64622-1e06-406b-a91b-bb4b309d595d" />
-
-
-
-**Monthly Sales Patterns**
-- Sale prices vary by month (seasonal effects)
-- Months 5-7 (May-July) show higher median prices
-- Winter months show more price variability
-
-<img width="975" height="552" alt="image" src="https://github.com/user-attachments/assets/9c18fcfd-9cbf-431d-a123-843cd3569cf0" />
-
-
-
-### 4. Neighborhood Analysis
-
-**Price by Neighborhood**
-- Computed average prediction errors by neighborhood
-- Neighborhoods ranked by pricing differential
-
-**Top 3 Overpriced Neighborhoods** (Model underestimates):
-1. NoRidge: +$182,334
-2. NridgHt: +$182,334
-3. StoneBr: +$152,573
-
-
-**Most Accurately Priced:** 
-- Neighborhoods with errors < $150K show consistent pricing patterns
-<img width="728" height="547" alt="image" src="https://github.com/user-attachments/assets/4738fe09-904f-4737-8723-0ac909b354e6" />
-
-
-
-### 5. Model Development
-
-**Model:** Linear Regression (baseline)
-- Features: All numerical variables after preprocessing
-- Target: SalePrice
-
-**Model Performance:**
-- **Mean Absolute Error (MAE):** $27,156
-- Provides reasonable baseline for price predictions
-- Error distribution shows most predictions within ±$50K
-
----
-
-## Results & Key Insights
-
-### Price Drivers (Correlation Insights)
-From the correlation heatmap, the strongest predictors are:
-1. **Overall Quality** — Property finish and material quality
-2. **Total Square Footage** — Combined living area
-3. **Garage Size** — Number of cars + area
-4. **Year Built/Remodeled** — Property age and updates
-5. **Full Bathrooms** — Number of complete bathrooms
-
-### Neighborhood Effects
-Significant pricing premiums observed in:
-- **NoRidge, NridgHt, StoneBr** — High-end neighborhoods with $150K+ premiums
-- Location can account for 15-30% of price variation after controlling for property features
-
-### Model Limitations
-- Linear model achieves MAE of ~$27K (14% of median price)
-- Struggles with luxury properties (>$500K)
-- Cannot capture non-linear relationships without feature engineering
-
----
-
-## Reproduce
-
-### Environment Setup
-```bash
-# Clone repository
-git clone <your-repo-url>
-cd housing-price-analysis
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-**Required packages:**
-```
-pandas>=1.3.0
-numpy>=1.21.0
-matplotlib>=3.4.0
-seaborn>=0.11.0
-scikit-learn>=1.0.0
-```
-
-### Run the Analysis
-```bash
-# Option 1: Jupyter Notebook
-jupyter notebook housing_analysis.ipynb
-
-# Option 2: Python script
-python housing_analysis.py
-```
-
-All visualizations will be saved to the `results/` directory.
-
----
-
-## Project Structure
-
-```
-housing-price-analysis/
-│
-├── data/
-│   └── AmesHousing.csv          # Raw dataset
-│
-├── results/                      # Generated visualizations
-│   ├── saleprice_distribution.png
-│   ├── correlation_heatmap.png
-│   ├── total_area_vs_price.png
-│   ├── monthly_sales.png
-│   ├── neighborhood_analysis.png
-│   └── error_distribution.png
-│
-├── housing_analysis.ipynb        # Main analysis notebook
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
-```
-
----
-
-## Next Steps
-
-### Model Improvements
-- **Feature Engineering:**
-  - Create interaction terms (e.g., Quality × Area)
-  - Polynomial features for non-linear relationships
-  - Encode categorical variables (One-Hot, Target Encoding)
-  
-- **Advanced Models:**
-  - Random Forest or Gradient Boosting (XGBoost, LightGBM)
-  - Ridge/Lasso regression for regularization
-  - Neural networks for complex patterns
-
-- **Cross-validation:**
-  - Implement k-fold CV for robust performance estimates
-  - Time-based splits to prevent data leakage
-
-### Extended Analysis
-- **Feature Importance:** SHAP values or permutation importance
-- **Residual Analysis:** Identify systematic prediction errors
-- **Geospatial Visualization:** Map price predictions by neighborhood
-- **Market Segmentation:** Cluster properties by type/price tier
-
-### Deployment
-- Build a Streamlit/Gradio web app for interactive predictions
-- API endpoint for real-time price estimates
-- Automated retraining pipeline with new data
-
----
-
-## Technical Notes
-
-- **Missing Data:** Current analysis uses complete cases; future iterations should implement imputation strategies
-- **Outliers:** Properties >$500K require special handling (log transformation, separate models)
-- **Feature Scaling:** Standardization applied to numerical features before modeling
-- **Multicollinearity:** High correlation between area-based features may inflate coefficient standard errors
-
----
-
-## References
-
-- **Dataset Source:** Ames Housing Dataset (De Cock, 2011)
-- **Scikit-learn Documentation:** https://scikit-learn.org/
-- **Pandas Documentation:** https://pandas.pydata.org/
-
----
-
-## Disclaimer
-
-This analysis is for educational and portfolio demonstration purposes only. Predictions should not be used as the sole basis for real estate decisions. Property valuations require professional appraisal considering local market conditions, legal factors, and property-specific details not captured in this dataset.
-
----
+Python Machine Learning Case Study: Ames Housing Price Prediction
+Project Overview
+This project demonstrates a complete machine learning workflow for predicting home sale prices using the Ames Housing dataset. The analysis follows best practices in data science, including exploratory data analysis, feature engineering, time-based train-test splitting, and model evaluation with interpretable error analysis.
+Dataset
+
+Source: AmesHousing.csv
+Target Variable: SalePrice (predicting sale price of single-family homes)
+Records: 2,929 home sales
+Features: 70 columns including property characteristics, location, and sale details
+
+Project Structure
+1. Data Quality & Initial Exploration
+
+Loaded the Ames Housing dataset with no duplicate records
+Examined data types and missing values using .info() and .describe()
+Visualized SalePrice distribution (showing right-skew typical for housing prices)
+
+2. Feature Engineering
+Created a Total Area feature combining:
+
+1st Floor SF
+2nd Floor SF
+Total Basement SF
+
+This provides a compact proxy for overall home size.
+3. Feature Screening
+
+Computed numeric correlations with SalePrice
+Generated correlation heatmap to identify strong relationships
+Key findings:
+
+Total Area: 0.793 correlation (strongest predictor)
+Overall Quality: 0.799 correlation
+Year Built: 0.558 correlation
+
+
+
+Used regression plots to check linearity and outliers, confirming Total Area shows clear positive trend.
+4. Train/Test Strategy
+Implemented time-based split to prevent data leakage:
+
+Training Set: Yr Sold < 2009 (1,940 records)
+Test Set: Yr Sold ≥ 2009 (989 records)
+
+This mimics real-world future prediction scenarios.
+5. Baseline Model
+Built simple Linear Regression with two features:
+
+Total Area
+Year Built
+
+Rationale: Establish transparent, explainable starting point before adding complexity.
+6. Model Evaluation
+Overall Performance
+
+Mean Absolute Error (MAE): $27,114
+Average prediction error of ~$27K on test set
+
+Error Analysis by Neighborhood
+Computed absolute errors per sale and grouped by neighborhood:
+Best Performing Neighborhoods (lowest relative error):
+
+CollgCr: 8.8%
+Somerst: 8.8%
+Gilbert: 9.0%
+
+Worst Performing Neighborhoods (highest relative error):
+
+MeadowV: 34.1%
+OldTown: 24.4%
+Edwards: 24.4%
+
+Insights: Model underperforms in lower-priced neighborhoods (MeadowV), suggesting need for additional features beyond just size and age.
+7. Error Distribution
+Histogram of relative errors shows most neighborhoods fall in 10-20% range, with long tail indicating some areas need improved modeling.
+Key Takeaways
+What Works
+✅ Total Area is strong predictor (79% correlation)
+✅ Time-based split prevents leakage
+✅ Baseline MAE of $27K establishes benchmark
+✅ Error analysis reveals geographic patterns
+Next Steps for Improvement
+🔄 Log-transform SalePrice to handle right-skew
+🔄 Add quality/condition features (Overall Qual shows 80% correlation)
+🔄 Include neighborhood-specific features
+🔄 Apply regularization (Ridge/Lasso) to reduce overfitting
+🔄 Test polynomial features for non-linear relationships
+Technologies Used
+
+Python 3.x
+pandas: Data manipulation
+matplotlib/seaborn: Visualization
+scikit-learn: Machine learning (LinearRegression, train_test_split, metrics)
+
+How to Run
+python# Load data
+import pandas as pd
+df = pd.read_csv("AmesHousing.csv")
+
+# Create features
+df["Total Area"] = df["1st Flr SF"] + df["2nd Flr SF"] + df["Total Bsmt SF"]
+
+# Time-based split
+train = df[df["Yr Sold"] < 2009]
+test = df[df["Yr Sold"] >= 2009]
+
+# Train model
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(train[["Total Area", "Year Built"]], train["SalePrice"])
+
+# Evaluate
+predictions = model.predict(test[["Total Area", "Year Built"]])
+Results Summary
+This baseline model achieves reasonable performance (~15% relative error on average) using only two interpretable features. The neighborhood-level error analysis provides actionable insights for targeted model improvements, particularly for lower-priced areas where simple size/age metrics are insufficient.
+Author
+Machine Learning Case Study - Hex Project
+License
+Educational/Research Use
+
+Note: This analysis prioritizes interpretability and reproducibility over raw performance. The simple two-feature model establishes a transparent baseline for comparison with more complex approaches.
