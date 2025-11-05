@@ -202,8 +202,5 @@ This project demonstrates:
 - Baseline model establishment
 - Interpretable error analysis by segment
 - The importance of starting simple before adding complexity
-
-
-Machine Learning Case Study
 ---
 
